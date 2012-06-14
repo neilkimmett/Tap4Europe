@@ -3,5 +3,10 @@
 
     <string name="hello">Hello World, Tap4EuropeActivity!</string>
     <string name="app_name">Tap4Europe</string>
+    <string name="search">Search</string>
+    <string name="settings">Settings</string>
+    <string name="help">help</string>
+    <string name="share">Share</string>
+    <string name="signin">Sign in with Facebook</string>
 
 </resources>

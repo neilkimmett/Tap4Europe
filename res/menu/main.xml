@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/menu_share"
+          android:icon="@drawable/socialshare"
+          android:title="@string/share"
+          android:showAsAction="ifRoom"
+          android:actionProviderClass="android.widget.ShareActionProvider">
+	</item>
+    <item 
+        android:id="@+id/search"
+        android:icon="@drawable/actionsearch"
+        android:title="@string/search"
+        android:showAsAction="ifRoom|withText">
+    </item>
+    <item 
+        android:id="@+id/settings" 
+        android:icon="@drawable/actionsettings" 
+        android:title="@string/settings"
+        android:showAsAction="ifRoom|withText">
+        
+    </item>
+    <item 
+        android:id="@+id/help"
+        android:title="@string/help"
+        android:icon="@drawable/actionhelp"
+        android:showAsAction="ifRoom|withText">
+    </item>
+</menu>

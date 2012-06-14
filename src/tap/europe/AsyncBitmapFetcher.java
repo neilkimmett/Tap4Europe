@@ -22,7 +22,9 @@ public class AsyncBitmapFetcher extends AsyncTask<URL, Void, Bitmap> {
 		        bis.close();
 		        return bm;
 		    } catch (IOException e) {
+		    	Log.d("BitmapFail", "failed to download");
 		    }
 		    return null;
 	}
 }
+

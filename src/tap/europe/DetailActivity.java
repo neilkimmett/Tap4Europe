@@ -15,8 +15,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.digibis.europeana4j.EuropeanaItem;
@@ -46,6 +51,22 @@ public class DetailActivity extends ListActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+        ListView list = getListView();
+
+		// Creating an item click listener, to open/close our toolbar for each item
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+
+                View toolbar = view.findViewById(R.id.extra_content);
+
+                // Creating the expand animation for the item
+                ExpandAnimation expandAni = new ExpandAnimation(toolbar, 500);
+
+                // Start the animation on the toolbar
+                toolbar.startAnimation(expandAni);
+            }
+        });
 	}
 
 	public Bitmap getRemoteImage(final URL aURL) {
@@ -72,7 +93,7 @@ public class DetailActivity extends ListActivity {
 		    if(row == null){
 		                    //getting custom layout to the row
 		        LayoutInflater inflater = getLayoutInflater();
-		        row=  inflater.inflate(R.layout.detail_list_row, parent, false);
+		        row = inflater.inflate(R.layout.detail_list_row, parent, false);
 		    }
 		    
 		    EuropeanaItem item = items.get(pos);
@@ -80,6 +101,14 @@ public class DetailActivity extends ListActivity {
 		    //get the reference to the textview of your row. find the item with row.findViewById()
 		    TextView label = (TextView)row.findViewById(R.id.label);
 		    label.setText(item.getTitle());
+		    
+		    TextView description = (TextView)row.findViewById(R.id.description);
+		    description.setText(item.getDescription());
+		    
+		 // Resets the extra content to be closed
+            View extraContent = row.findViewById(R.id.extra_content);
+            ((LinearLayout.LayoutParams) extraContent.getLayoutParams()).bottomMargin = -50;
+            extraContent.setVisibility(View.GONE);
 
 		    if (item.isImage())
 		    {
@@ -88,7 +117,8 @@ public class DetailActivity extends ListActivity {
 		    	try {
 		    		imageURL = new URL(item.getBestThumbnail());
 		    		AsyncBitmapFetcher fetcher = new AsyncBitmapFetcher();
-		    		imageView.setImageBitmap(fetcher.execute(imageURL).get());
+		    		Bitmap bitmap = fetcher.execute(imageURL).get();
+				    imageView.setImageBitmap(bitmap);
 		    	} catch (MalformedURLException e) {
 		    		// TODO Auto-generated catch block
 		    		e.printStackTrace();

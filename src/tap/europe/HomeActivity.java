@@ -37,10 +37,10 @@ public class HomeActivity extends MapActivity {
 	
 	    setContentView(R.layout.home);
 	    
-	    /** Debug stuff for Neil  
+	    /** Debug stuff for Neil  */
 	    Intent myIntent = new Intent(HomeActivity.this, DetailActivity.class);
 	    HomeActivity.this.startActivity(myIntent);
-	    **/
+	    
 	    
 	    //Set current Map location view to Leuven area
 	    setLocation();

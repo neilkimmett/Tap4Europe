@@ -33,7 +33,7 @@
         </intent-filter>
         </activity>
         <activity android:name="NdefWriterNFC"></activity>
-        
+        <activity android:name="DetailActivity"></activity>
     </application>
 
 </manifest>

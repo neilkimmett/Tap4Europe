@@ -30,7 +30,7 @@ public class Tap4EuropeActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         
         setContentView(R.layout.main);
-        
+
         mPrefs = getPreferences(MODE_PRIVATE);
         
         String access_token = mPrefs.getString("access_token", null);

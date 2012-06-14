@@ -2,14 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/background_beige"
     android:orientation="vertical" >
-
-    <Button
-        android:id="@+id/button1"
+
+    <ImageView
+        android:id="@+id/splash_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/facebook_button"
-        android:layout_centerInParent="true"
-        />
+        android:contentDescription="@string/splash_icon_description"
+        android:src="@drawable/splash" />
+
+    <Button
+        android:id="@+id/skip_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/skip_login_message" />
+
+    <Button
+        android:id="@+id/facebook_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/skip_login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/facebook_button" />
 
 </RelativeLayout>

@@ -3,5 +3,7 @@
 
     <string name="hello">Hello World, Tap4EuropeActivity!</string>
     <string name="app_name">Tap4Europe</string>
-
+    <string name="splash_icon_description">Tap4Europe splash image</string>
+    <string name="skip_login_message">Skip login for now</string>
+    
 </resources>

@@ -22,7 +22,7 @@ public class Tap4EuropeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        signinButton = (Button)findViewById(R.id.button1);
+        signinButton = (Button)findViewById(R.id.facebook_button);
         signinButton.setOnClickListener(new Button.OnClickListener(){
 
 			public void onClick(View v) 

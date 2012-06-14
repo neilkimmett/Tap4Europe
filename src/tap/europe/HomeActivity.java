@@ -2,10 +2,12 @@ package tap.europe;
 
 import java.io.IOException;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import tap.europe.*;
 
 import com.google.android.maps.GeoPoint;
@@ -29,6 +31,11 @@ public class HomeActivity extends MapActivity {
 	    super.onCreate(savedInstanceState);
 	
 	    setContentView(R.layout.home);
+	    
+	    /** Debug stuff for Neil 
+	    Intent myIntent = new Intent(HomeActivity.this, DetailActivity.class);
+	    HomeActivity.this.startActivity(myIntent);
+	    ***/
 	    
 	    //Set current Map location view to Leuven area
 	    setLocation();

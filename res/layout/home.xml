@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+<RelativeLayout 
     android:id="@+id/main"
-    android:layout_width="fill_parent" 
-    android:layout_height="fill_parent">
-    
-<com.google.android.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <com.google.android.maps.MapView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mapview"
         android:layout_width="fill_parent"
-        android:layout_height="140dp"
-        android:clickable="true"
-        android:apiKey="0gWdgeuq_K4ANjlzX4LnAKQYfSEsOT2oe4b6wQw"/>
+        android:layout_height="180dp"
+        android:apiKey="0gWdgeuq_K4ANjlzX4LnAKQYfSEsOT2oe4b6wQw"
+        android:clickable="true" />
 
 </RelativeLayout>
+
+<include android:id="@+id/badge_stars" layout="@layout/badge_stars"
+    android:gravity="center_horizontal" />
+<include android:id="@+id/points" layout="@layout/points" 
+    android:gravity="center_horizontal" />
+
+</LinearLayout>

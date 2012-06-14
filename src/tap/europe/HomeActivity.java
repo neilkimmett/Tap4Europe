@@ -3,12 +3,18 @@ package tap.europe;
 import java.io.IOException;
 import java.util.List;
 
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -27,6 +33,12 @@ public class HomeActivity extends MapActivity {
 	private static final double leuvenLong = 50.877621;
 	private static final double leuvenLat = 4.704321;
 	
+	private int idtoWrite = 1;
+	private boolean mWriteMode;
+	private IntentFilter[] mWriteTagFilters;
+	private PendingIntent mNfcPendingIntent;
+	private NfcAdapter mNfcAdapter;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,16 +47,27 @@ public class HomeActivity extends MapActivity {
 	    setContentView(R.layout.home);
 	    
 	    //Set current Map location view to Leuven area
-	    setLocation();
+	    setLocation(); 
 	    
 	    setMapView();
+	}
+	
+	
+	
+	@Override
+	protected void onResume() {
+		
+		super.onResume();
+		
+		enableTagWriteMode();
 	}
 	
 	
 	/*
 	 * Sets the currentLoc to point to the Leuven area
 	 */
-	
+
+
 	private void setLocation() {
 		
 		Location leuven = new Location("Leuven");
@@ -64,7 +87,7 @@ public class HomeActivity extends MapActivity {
 		mapView.setBuiltInZoomControls(false);
 		mapView.setSatellite(false);
 		mapView.setActivated(false);
-		mapView.setClickable(false);
+		mapView.setClickable(true);
 		
 		addMapOverlays();
 		
@@ -144,5 +167,32 @@ public class HomeActivity extends MapActivity {
 	protected boolean isRouteDisplayed() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+private void enableTagWriteMode() {
+		
+		mWriteMode = true;
+	    IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
+	    mNfcAdapter = NfcAdapter.getDefaultAdapter();
+	    mNfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), 0);
+	    mWriteTagFilters = new IntentFilter[] { tagDetected };
+	    mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent, mWriteTagFilters, null);
+		
+	}
+	
+	@Override
+	public void onNewIntent(Intent intent) {
+	    // Tag writing mode
+	    if (mWriteMode && NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
+	        Tag detectedTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+	        if (NfcUtils.writeTag(NfcUtils.getPlaceidAsNdef(idtoWrite), detectedTag)) {
+	            Toast.makeText(this, "Success: Wrote placeid to nfc tag", Toast.LENGTH_LONG)
+	                .show();
+	        } 
+	        else 
+	        {
+	            Toast.makeText(this, "Write failed", Toast.LENGTH_LONG).show();
+	        }
+	    }
 	}
 }

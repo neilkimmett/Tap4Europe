@@ -1,4 +1,6 @@
 <resources>
 <color name="background_beige">#f5f4f0</color>
 <color name="light_grey">#aaaaaa</color>
+<color name="points_text">#ff6600</color>
+<color name="home_background">#A0A0A0</color>
 </resources>

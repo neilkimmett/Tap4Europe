@@ -63,7 +63,8 @@ public class Tap4EuropeActivity extends Activity {
 		startActivity(i);
                 
         skipLoginView = (TextView)findViewById(R.id.skip_login_text_view);
-        skipLoginView.setOnClickListener(new Button.OnClickListener(){
+        skipLoginView.setOnClickListener(new Button.OnClickListener()
+        {
         	public void onClick(View v) 
 			{
 				authorizeFacebook();

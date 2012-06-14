@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:text="@string/points_text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/points_text"
+        android:typeface="serif" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/points_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/points_desc"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/points_text"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/points_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
+<LinearLayout
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	android:gravity="center_horizontal" >
+
+    <TextView
+        android:id="@+id/points_bonus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/points_text"
+        android:text="@string/points_bonus"
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/bonus_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:paddingLeft="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	</LinearLayout>
+</LinearLayout>

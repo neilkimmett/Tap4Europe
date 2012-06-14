@@ -10,5 +10,8 @@
     <string name="signin">Sign in with Facebook</string>
     <string name="splash_icon_description">Tap4Europe splash image</string>
     <string name="skip_login_message"><u>Skip login for now</u></string>
+    <string name="points_text">Your Progress</string>
+    <string name="points_desc">Points</string>
+    <string name="points_bonus">Bonus Points</string>
     
 </resources>

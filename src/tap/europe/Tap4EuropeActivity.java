@@ -26,10 +26,10 @@ public class Tap4EuropeActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        setContentView(R.layout.main);
-        
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        
+        setContentView(R.layout.main);
         
         mPrefs = getPreferences(MODE_PRIVATE);
         

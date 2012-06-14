@@ -15,7 +15,7 @@ public class EuropeanaOverlay extends ItemizedOverlay<OverlayItem> {
 	private Context mContext;
 
 	public EuropeanaOverlay(Drawable defaultMarker, Context context) {
-		super(defaultMarker);
+		super(boundCenterBottom(defaultMarker));
 
 		mOverlays = new ArrayList<OverlayItem>();
 		mContext = context;

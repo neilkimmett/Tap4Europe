@@ -13,7 +13,8 @@ public class AsyncAPIQuery extends AsyncTask<EuropeanaQuery, Void, EuropeanaResu
     private Exception exception;
 	
     protected void onPostExecute(EuropeanaResults results) {
-        // TODO: check this.exception 
+        // TODO: check this.exception
+    	Log.d("APIResults","Results finished downloading");
 		Log.d("APIResults",results.toJSON());
     }
 

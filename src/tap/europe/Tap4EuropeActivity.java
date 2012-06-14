@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
@@ -18,12 +20,16 @@ public class Tap4EuropeActivity extends Activity {
     private String[] permissions = new String[] {"email", "publish_checkins"};
     private Button signinButton;
     private SharedPreferences mPrefs;
+    TextView skipLoginView;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.main);
+        
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         
         mPrefs = getPreferences(MODE_PRIVATE);
         
@@ -41,7 +47,7 @@ public class Tap4EuropeActivity extends Activity {
         }
         else if(access_token == null)
         {
-        	signinButton = (Button)findViewById(R.id.button1);
+        	signinButton = (Button)findViewById(R.id.facebook_button);
             signinButton.setOnClickListener(new Button.OnClickListener(){
 
     			public void onClick(View v) 
@@ -54,8 +60,16 @@ public class Tap4EuropeActivity extends Activity {
                 
         Intent i = new Intent();
 		i.setClass(this, HomeActivity.class);
-		startActivity(i);	
-    }
+		startActivity(i);
+                
+        skipLoginView = (TextView)findViewById(R.id.skip_login_text_view);
+        skipLoginView.setOnClickListener(new Button.OnClickListener(){
+        	public void onClick(View v) 
+			{
+				authorizeFacebook();
+			}
+        });
+   }
     
     private void authorizeFacebook()
     {

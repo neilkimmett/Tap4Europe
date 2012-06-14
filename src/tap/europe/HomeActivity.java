@@ -2,12 +2,11 @@ package tap.europe;
 
 import java.io.IOException;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import tap.europe.*;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;

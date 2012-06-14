@@ -1,19 +1,30 @@
 package tap.europe;
 
 import java.io.IOException;
+import java.util.List;
 
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+>>>>>>> c3f680e87b04c5a69c7e91575c76a97bc5712b4d
 import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+<<<<<<< HEAD
 import android.view.MenuItem;
 import tap.europe.*;
+=======
+>>>>>>> c3f680e87b04c5a69c7e91575c76a97bc5712b4d
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 
 public class HomeActivity extends MapActivity {
 	
@@ -78,6 +89,14 @@ public class HomeActivity extends MapActivity {
 
 	private void addMapOverlays() {
 		
+		List<Overlay> mapOverlays = mapView.getOverlays();
+		
+		Drawable drawable_visited = this.getResources().getDrawable(R.drawable.point);
+		Drawable drawable_notvisited = this.getResources().getDrawable(R.drawable.point);
+		
+		EuropeanaOverlay notvisitedOverlay = new EuropeanaOverlay(drawable_notvisited, this);
+		EuropeanaOverlay visitedOverlay = new EuropeanaOverlay(drawable_visited, this);
+		
 		DatabaseHelper dbHelper = new DatabaseHelper(this);
 		
 		try {
@@ -88,6 +107,43 @@ public class HomeActivity extends MapActivity {
 		
 		dbHelper.openDataBase();
 		
+		Cursor cursor = dbHelper.getPlaces();
+		cursor.moveToFirst();
+		
+		while(cursor.isAfterLast() == false)
+		{
+			String name = cursor.getString(1);
+			int longitude = (int) (cursor.getDouble(2) * 1E6);
+			int latitude = (int) (cursor.getDouble(3) * 1E6);
+			String description = (cursor.getString(4));
+			int visited = cursor.getInt(5);
+			
+			GeoPoint point = new GeoPoint(longitude, latitude);
+			OverlayItem item = new OverlayItem(point, name, description);
+			
+			if(visited == 1)
+			{
+				visitedOverlay.addOverlay(item);
+			}
+			else
+			{
+				notvisitedOverlay.addOverlay(item);
+			}
+			
+			cursor.moveToNext();
+		}
+		
+		if(notvisitedOverlay.size() >= 1)
+		{
+			mapOverlays.add(notvisitedOverlay);
+		}
+		if(visitedOverlay.size() >= 1)
+		{
+			mapOverlays.add(visitedOverlay);
+		}
+		
+		cursor.close();
+		dbHelper.close();
 	}
 
 

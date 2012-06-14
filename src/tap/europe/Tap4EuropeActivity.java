@@ -31,7 +31,6 @@ public class Tap4EuropeActivity extends Activity {
         
         setContentView(R.layout.main);
 
-        
         mPrefs = getPreferences(MODE_PRIVATE);
         
         String access_token = mPrefs.getString("access_token", null);

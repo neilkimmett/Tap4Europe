@@ -144,6 +144,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return cursor;
 	}
 	
+	public Cursor getPlaceById(Integer id)
+	{
+		Cursor cursor = myDataBase.query("Place", null, "_id " + "=" + id, null, null, null, null);
+		
+		return cursor;
+	}
 	public void updatePlace(EuropeanaLocation loc)
 	{
 		ContentValues cv = new ContentValues();

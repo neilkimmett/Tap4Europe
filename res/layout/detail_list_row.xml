@@ -15,6 +15,7 @@
 
         <ImageView
             android:id="@+id/image"
+            android:contentDescription="@string/thumbnail_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="2dip" />
@@ -31,8 +32,16 @@
         android:layout_width="fill_parent"
         android:layout_height="50dip"
         android:layout_marginBottom="-50dip"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:visibility="gone" >
+		
+        <ImageButton
+            android:id="@+id/share_button"
+            android:contentDescription="@string/share"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:src="@drawable/socialshare"
+             />
 
         <TextView
             android:id="@+id/description"

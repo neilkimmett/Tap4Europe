@@ -14,4 +14,5 @@
     <string name="points_desc">Points</string>
     <string name="points_bonus">Bonus Points</string>
     <string name="location">Location:</string>
+    <string name="thumbnail_image">Thumbnail image of item</string>
 </resources>

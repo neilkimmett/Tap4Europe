@@ -144,6 +144,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return cursor;
 	}
 	
+	public Cursor getPoints(int userId)
+	{
+		Cursor cursor = myDataBase.query("User", new String[]{"Points"}, "_id = " + userId, null, null, null, null);
+		
+		return cursor;
+	}
+	
+	public EuropeanaLocation getLocationById(int LocID)
+	{
+		EuropeanaLocation loc = new EuropeanaLocation();
+		
+		Cursor cursor = myDataBase.query("Place", null, "_id = " + LocID, null, null, null, null);
+		cursor.moveToFirst();
+		
+		while(cursor.isAfterLast() == false)
+		{
+			loc.setName(cursor.getString(1));
+			loc.setVisited(cursor.getInt(5));
+		}
+		
+		return loc;
+	}
+	
 	public void updatePlace(EuropeanaLocation loc)
 	{
 		ContentValues cv = new ContentValues();
@@ -154,6 +177,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		cv.put("Visited", loc.getVisited());
 		
 		myDataBase.update("Place", cv, "_id " + "=" + loc.getID(), null);
+	}
+	
+	public void updatePoints(int _id, int points)
+	{
+		ContentValues cv = new ContentValues();
+		cv.put("Points", points);
+		
+		myDataBase.update("User", cv, "id = " + points, null);
+	}
+	
+	public void createUser(int _id, String name, String surname, String eMail, int points)
+	{
+		
 	}
 
 }

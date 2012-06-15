@@ -1,18 +1,27 @@
 package tap.europe;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
+import com.facebook.android.Util;
 
 public class Tap4EuropeActivity extends Activity {
 	
@@ -31,7 +40,7 @@ public class Tap4EuropeActivity extends Activity {
         
         setContentView(R.layout.main);
 
-        mPrefs = getPreferences(MODE_PRIVATE);
+        mPrefs = getSharedPreferences("europeana", MODE_PRIVATE);
         
         String access_token = mPrefs.getString("access_token", null);
         
@@ -58,10 +67,6 @@ public class Tap4EuropeActivity extends Activity {
             });
         }
                 
-        Intent i = new Intent();
-		i.setClass(this, HomeActivity.class);
-		startActivity(i);
-                
         skipLoginView = (TextView)findViewById(R.id.skip_login_text_view);
         skipLoginView.setOnClickListener(new Button.OnClickListener()
         {
@@ -72,11 +77,57 @@ public class Tap4EuropeActivity extends Activity {
         });
    }
     
+    private void startHome()
+    {
+    	Intent i = new Intent();
+		i.setClass(this, HomeActivity.class);
+		startActivity(i);
+    }
+    
     private void authorizeFacebook()
     {
+    	
+    	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+    	StrictMode.setThreadPolicy(policy); 
+    	
     	facebook.authorize(this, permissions, new DialogListener(){
         	
-            public void onComplete(Bundle values) {}
+            public void onComplete(Bundle values) 
+            {
+            	String jsonUser = null;
+				try {
+					jsonUser = facebook.request("me");
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	JSONObject obj = null;
+				try {
+					obj = Util.parseJson(jsonUser);
+				} catch (FacebookError e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	
+            	String facebookId = obj.optString("id");
+            	String name = obj.optString("name");
+            	
+            	SharedPreferences.Editor editor = mPrefs.edit();
+            	editor.putString("fb_name", name);
+            	editor.putString("fb_id", facebookId);
+            	editor.commit();
+            	
+            	Toast.makeText(getApplicationContext(), "Signed in with " + name, Toast.LENGTH_LONG).show();
+            	
+            	startHome();
+            }
 
             public void onFacebookError(FacebookError error) {}
 

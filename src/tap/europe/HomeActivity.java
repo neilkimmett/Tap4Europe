@@ -77,6 +77,7 @@ public class HomeActivity extends MapActivity {
 	
 	    setContentView(R.layout.home);
 
+	    
 	    //Set current Map location view to Leuven area
 	    setLocation(); 
 	    

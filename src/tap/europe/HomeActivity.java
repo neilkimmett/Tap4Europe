@@ -46,6 +46,8 @@ public class HomeActivity extends MapActivity {
 	
 	    setContentView(R.layout.home);
 
+	    Intent myIntent = new Intent(HomeActivity.this, DetailActivity.class);
+ 	    HomeActivity.this.startActivity(myIntent);
 	    
 	    //Set current Map location view to Leuven area
 	    setLocation(); 
@@ -60,7 +62,7 @@ public class HomeActivity extends MapActivity {
 		
 		super.onResume();
 		
-		enableTagWriteMode();
+		//enableTagWriteMode();
 	}
 	
 	
@@ -174,7 +176,7 @@ private void enableTagWriteMode() {
 		
 		mWriteMode = true;
 	    IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
-	    mNfcAdapter = NfcAdapter.getDefaultAdapter();
+	    mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 	    mNfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), 0);
 	    mWriteTagFilters = new IntentFilter[] { tagDetected };
 	    mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent, mWriteTagFilters, null);

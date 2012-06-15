@@ -13,5 +13,5 @@
     <string name="points_text">Your Progress</string>
     <string name="points_desc">Points</string>
     <string name="points_bonus">Bonus Points</string>
-    
+    <string name="location">Location:</string>
 </resources>
